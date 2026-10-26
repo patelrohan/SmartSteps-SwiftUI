@@ -1,0 +1,125 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Swift Package Manager
+.build/
+.swiftpm/xcode/
+.swiftpm/cache/
+Packages/
+
+# Xcode
+DerivedData/
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+*.xcuserstate
+*.xcuserdatad
+*.xcbkptlist
+
+# Xcode build output
+build/
+Build/
+*.o
+*.LinkFileList
+*.hmap
+*.ipa
+*.dSYM
+*.dSYM.zip
+
+# iOS/visionOS/watchOS/tvOS specific
+*.xcarchive
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# SwiftPM resolved file (keep if you prefer to commit lockfile)
+# Package.resolved
+
+# CocoaPods
+Pods/
+# If you have a workspace that needs Pods committed, remove the line above
+
+# Carthage
+Carthage/Build/
+Carthage/Checkouts/
+
+# Accio dependency manager
+Dependencies/
+.accio/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+fastlane/README.md
+
+# Code coverage
+*.gcno
+*.profraw
+*.profdata
+
+# SwiftLint cache
+.swiftlint.yml.lock
+.swiftlint.cache
+
+# Tuist
+Tuist/Dependencies/
+
+# Firebase / Crashlytics
+*.plist.bak
+
+# SPM/Xcode caches
+*.xcframework
+SourcePackages/
+
+# Bundler
+.bundle/
+
+# Ruby gems
+vendor/bundle
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# User-specific
+*.iml
+.idea/
+
+# Editor configs
+.vscode/
+
+# Mint
+mint/
+
+# Generated assets
+Generated/
+
+# SwiftGen
+swiftgen.yml.lock
+
+# SwiftFormat
+.swiftformat.lock
+
+# Xcode Cloud
+.xcresult
+
+# Other
+*.orig
+*.rej
