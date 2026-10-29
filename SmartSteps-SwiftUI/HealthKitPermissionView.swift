@@ -6,8 +6,14 @@
 //
 
 import SwiftUI
+import HealthKitUI
 
 struct HealthKitPermissionView: View {
+
+    @Environment(HealthKitManager.self) private var hkManager
+    @Environment(\.dismiss) private var dismiss
+
+    @State private var isShowingHalthKitPermission = false
 
     var description = "This app displays your steps count and workout data in interactive charts. \n\nYou can also add these data to Apple Health app from this app. Your data is private and secure."
 
@@ -31,15 +37,27 @@ struct HealthKitPermissionView: View {
             }.padding(30)
 
             Button("Connect Apple Health"){
-
+                isShowingHalthKitPermission = true
             }
             .buttonStyle(.glassProminent)
             .tint(.pink)
-
+        }
+        .healthDataAccessRequest(store: hkManager.store,
+                                 shareTypes: hkManager.types,
+                                 readTypes: hkManager.types,
+                                 trigger: isShowingHalthKitPermission) { result in
+            switch result{
+            case .success(let success):
+                dismiss()
+            case .failure(let failure):
+                //TODO: handle failure
+                dismiss()
+            }
         }
     }
 }
 
 #Preview {
     HealthKitPermissionView()
+        .environment(HealthKitManager())
 }
