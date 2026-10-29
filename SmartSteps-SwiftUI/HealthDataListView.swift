@@ -16,8 +16,8 @@ struct HealthDataListView: View {
     @State private var valueToAdd: String = ""
 
     var body: some View {
-        List(0..<25) { i in
-            HStack{
+        List(0..<25) { _ in
+            HStack {
                 Text(Date(), format: .dateTime.month().day().year())
                 Spacer()
                 Text(10000, format: .number.precision(.fractionLength(metric == .steps ? 0 : 2)))
@@ -28,7 +28,7 @@ struct HealthDataListView: View {
             addDataView
         }
         .toolbar {
-            Button("Add Data", systemImage: "plus"){
+            Button("Add Data", systemImage: "plus") {
                 isShowingAddData = true
             }
         }
@@ -36,11 +36,11 @@ struct HealthDataListView: View {
 
     var addDataView: some View {
         NavigationStack {
-            Form{
-                //DatePicker(selection: $addDataDate, displayedComponents: .date, label: "Date")
+            Form {
+                // DatePicker(selection: $addDataDate, displayedComponents: .date, label: "Date")
                 DatePicker("Date", selection: $addDataDate, displayedComponents: .date)
 
-                HStack{
+                HStack {
                     Text(metric.title)
                     Spacer()
                     TextField("Value", text: $valueToAdd)
@@ -52,24 +52,23 @@ struct HealthDataListView: View {
             .navigationTitle(metric.title)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Add Data"){
-                        //Add action later
+                    Button("Add Data") {
+                        // Add action later
                     }
                 }
 
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Cancel"){
+                    Button("Cancel") {
                         isShowingAddData = false
                     }
                 }
             }
-
         }
     }
 }
 
 #Preview {
-    NavigationStack{
+    NavigationStack {
         HealthDataListView(metric: .weight)
     }
 }

@@ -1,13 +1,13 @@
 import SwiftUI
 import Playgrounds
 
-enum HealthMetricContext: CaseIterable, Identifiable{
+enum HealthMetricContext: CaseIterable, Identifiable {
     case steps, weight
 
     var id: Self { self }
 
-    var title: String{
-        switch self{
+    var title: String {
+        switch self {
         case .steps:
             return "Steps"
 
@@ -17,12 +17,11 @@ enum HealthMetricContext: CaseIterable, Identifiable{
     }
 }
 
-
 struct DashboardView: View {
 
     @State private var selectedStat: HealthMetricContext = .steps
 
-    var isSteps: Bool{ selectedStat == .steps }
+    var isSteps: Bool { selectedStat == .steps }
 
     var body: some View {
 
@@ -36,9 +35,9 @@ struct DashboardView: View {
                         }
                     }.pickerStyle(.segmented)
 
-                    VStack{
-                        NavigationLink(value: selectedStat){
-                            HStack{
+                    VStack {
+                        NavigationLink(value: selectedStat) {
+                            HStack {
                                 VStack(alignment: .leading) {
                                     Label("Steps", systemImage: "figure.walk")
                                         .font(.title3.bold())
@@ -63,8 +62,7 @@ struct DashboardView: View {
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 12).fill(Color(.secondarySystemBackground)))
 
-
-                    VStack (alignment: .leading){
+                    VStack(alignment: .leading) {
                         VStack(alignment: .leading) {
                             Label("Averages", systemImage: "calendar")
                                 .font(.title3.bold())
@@ -93,7 +91,6 @@ struct DashboardView: View {
             }
         }
         .tint(isSteps ? .pink : .indigo)
-
     }
 }
 
