@@ -6,8 +6,13 @@
 	objectVersion = 90;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4AF575CF308FB4B30023F863 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 4AF575CE308FB4B30023F863 /* .gitignore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		000000000000000000000120 /* SmartSteps-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SmartSteps-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AF575CE308FB4B30023F863 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -31,6 +36,7 @@
 			isa = PBXGroup;
 			children = (
 				000000000000000000000010 /* SmartSteps-SwiftUI */,
+				4AF575CE308FB4B30023F863 /* .gitignore */,
 				000000000000000000000020 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,6 +94,8 @@
 			);
 			mainGroup = 000000000000000000000001;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+			);
 			preferredProjectObjectVersion = 90;
 			productRefGroup = 000000000000000000000020 /* Products */;
 			projectDirPath = "";
@@ -102,6 +110,7 @@
 		000000000000000140000000 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
+				4AF575CF308FB4B30023F863 /* .gitignore in Resources */,
 			);
 		};
 /* End PBXResourcesBuildPhase section */
