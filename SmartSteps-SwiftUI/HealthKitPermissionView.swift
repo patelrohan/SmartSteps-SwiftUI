@@ -15,6 +15,8 @@ struct HealthKitPermissionView: View {
 
     @State private var isShowingHalthKitPermission = false
 
+    @Binding var hasSeenHealthKitPermissionView: Bool
+
     var description = "This app displays your steps count and workout data in interactive charts. \n\nYou can also add these data to Apple Health app from this app. Your data is private and secure."
 
     var body: some View {
@@ -42,6 +44,10 @@ struct HealthKitPermissionView: View {
             .buttonStyle(.glassProminent)
             .tint(.pink)
         }
+        .interactiveDismissDisabled()
+        .onAppear(perform: {
+            hasSeenHealthKitPermissionView = true
+        })
         .healthDataAccessRequest(store: hkManager.store,
                                  shareTypes: hkManager.types,
                                  readTypes: hkManager.types,
@@ -58,6 +64,6 @@ struct HealthKitPermissionView: View {
 }
 
 #Preview {
-    HealthKitPermissionView()
+    HealthKitPermissionView(hasSeenHealthKitPermissionView: .constant(true))
         .environment(HealthKitManager())
 }
