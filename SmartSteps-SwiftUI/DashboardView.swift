@@ -21,6 +21,8 @@ struct DashboardView: View {
 
     @AppStorage("hasSeenPermissionScreen") private var hasSeenPermissionScreen = false
 
+    @Environment(HealthKitManager.self) private var hkManager
+
     @State private var isShowingPermissionScreen = false
     @State private var selectedStat: HealthMetricContext = .steps
 
@@ -88,9 +90,10 @@ struct DashboardView: View {
                 }
             }
             .padding()
-            .onAppear(perform: {
+            .task {
                 isShowingPermissionScreen = !hasSeenPermissionScreen
-            })
+                //await hkManager.addMockData()
+            }
             .navigationTitle("Dashboard")
             .navigationDestination(for: HealthMetricContext.self) { metric in
                 HealthDataListView(metric: metric)

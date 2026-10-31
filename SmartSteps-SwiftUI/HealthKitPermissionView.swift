@@ -49,8 +49,8 @@ struct HealthKitPermissionView: View {
             hasSeenHealthKitPermissionView = true
         })
         .healthDataAccessRequest(store: hkManager.store,
-                                 shareTypes: hkManager.types,
-                                 readTypes: hkManager.types,
+                                 shareTypes: hkManager.healthDataTypes,
+                                 readTypes: hkManager.healthDataTypes,
                                  trigger: isShowingHalthKitPermission) { result in
             switch result{
             case .success(let success):
