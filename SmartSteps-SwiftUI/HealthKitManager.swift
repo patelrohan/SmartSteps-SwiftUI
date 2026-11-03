@@ -27,12 +27,16 @@ import HealthKit
         let sumOfStepsQuery = HKStatisticsCollectionQueryDescriptor(predicate: samplePredicate,
                                                                options: .cumulativeSum, anchorDate: endDate,
                                                                intervalComponents: .init(day: 1))
-        let stepStatisticsCollection = try! await sumOfStepsQuery.result(for: store)
 
-        stepData = stepStatisticsCollection.statistics().map({ stepStatistic in
-            let steps = stepStatistic.sumQuantity()?.doubleValue(for: .count()) ?? 0
-            return HealthMetric(date: stepStatistic.startDate, value: steps)
-        })
+        do {
+            let stepStatisticsCollection = try await sumOfStepsQuery.result(for: store)
+            stepData = stepStatisticsCollection.statistics().map({ stepStatistic in
+                let steps = stepStatistic.sumQuantity()?.doubleValue(for: .count()) ?? 0
+                return HealthMetric(date: stepStatistic.startDate, value: steps)
+            })
+        } catch{
+
+        }
 
         //simplified alternate version of map iteration
 
@@ -56,12 +60,17 @@ import HealthKit
                                                                   options: .cumulativeSum,
                                                                   anchorDate: endDate,
                                                                   intervalComponents: .init(day: 1))
-        let distanceStatisticsCollection = try! await distanceQuery.result(for: store)
 
-        distanceData = distanceStatisticsCollection.statistics().map({ distanceStatistic in
-            let distance = distanceStatistic.sumQuantity()?.doubleValue(for: .mile()) ?? 0
-            return HealthMetric(date: distanceStatistic.startDate, value: distance)
-        })
+        do {
+            let distanceStatisticsCollection = try await distanceQuery.result(for: store)
+
+            distanceData = distanceStatisticsCollection.statistics().map({ distanceStatistic in
+                let distance = distanceStatistic.sumQuantity()?.doubleValue(for: .mile()) ?? 0
+                return HealthMetric(date: distanceStatistic.startDate, value: distance)
+            })
+        } catch{
+
+        }
     }
 
 
