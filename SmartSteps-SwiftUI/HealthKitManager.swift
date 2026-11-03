@@ -13,6 +13,9 @@ import HealthKit
     let store = HKHealthStore()
     let healthDataTypes: Set = [HKQuantityType(.stepCount), HKQuantityType(.distanceWalkingRunning)]
 
+    var stepData: [HealthMetric] = []
+    var distanceData: [HealthMetric] = []
+
     func getStepCount() async {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: .now)
@@ -21,10 +24,24 @@ import HealthKit
 
         let queryPredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
         let samplePredicate = HKSamplePredicate.quantitySample(type: HKQuantityType(.stepCount), predicate: queryPredicate)
-        let stepsQuery = HKStatisticsCollectionQueryDescriptor(predicate: samplePredicate,
+        let sumOfStepsQuery = HKStatisticsCollectionQueryDescriptor(predicate: samplePredicate,
                                                                options: .cumulativeSum, anchorDate: endDate,
                                                                intervalComponents: .init(day: 1))
-        let stepCounts = try! await stepsQuery.result(for: store)
+        let stepStatisticsCollection = try! await sumOfStepsQuery.result(for: store)
+
+        stepData = stepStatisticsCollection.statistics().map({ stepStatistic in
+            let steps = stepStatistic.sumQuantity()?.doubleValue(for: .count()) ?? 0
+            return HealthMetric(date: stepStatistic.startDate, value: steps)
+        })
+
+        //simplified alternate version of map iteration
+
+        /* var result: [HealthMetric] = []
+        for statistic in stepStatisticsCollection.statistics() {
+            let steps = statistic.sumQuantity()?.doubleValue(for: .count()) ?? 0
+            result.append(HealthMetric(date: statistic.startDate, value: steps))
+        }
+        stepData = result */
     }
 
     func getDistanceData() async {
@@ -39,7 +56,12 @@ import HealthKit
                                                                   options: .cumulativeSum,
                                                                   anchorDate: endDate,
                                                                   intervalComponents: .init(day: 1))
-        let distanceData = try! await distanceQuery.result(for: store)
+        let distanceStatisticsCollection = try! await distanceQuery.result(for: store)
+
+        distanceData = distanceStatisticsCollection.statistics().map({ distanceStatistic in
+            let distance = distanceStatistic.sumQuantity()?.doubleValue(for: .mile()) ?? 0
+            return HealthMetric(date: distanceStatistic.startDate, value: distance)
+        })
     }
 
 
