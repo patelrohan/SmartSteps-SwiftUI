@@ -11,7 +11,7 @@ import HealthKit
 @Observable class HealthKitManager {
 
     let store = HKHealthStore()
-    let healthDataTypes: Set = [HKQuantityType(.stepCount), HKQuantityType(.distanceWalkingRunning)]
+    let healthDataTypes: Set = [HKQuantityType(.stepCount), HKQuantityType(.bodyMass)]
 
     var stepData: [HealthMetric] = []
     var distanceData: [HealthMetric] = []
@@ -48,21 +48,21 @@ import HealthKit
         stepData = result */
     }
 
-    func getDistanceData() async {
+    func getWeightData() async {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: .now)
         let endDate = calendar.date(byAdding: .day, value: 1, to: today)!
         let startDate = calendar.date(byAdding: .day, value: -28, to: endDate)
 
         let queryPredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
-        let samplePredicate = HKSamplePredicate.quantitySample(type: HKQuantityType(.distanceWalkingRunning), predicate: queryPredicate)
-        let distanceQuery = HKStatisticsCollectionQueryDescriptor(predicate: samplePredicate,
-                                                                  options: .cumulativeSum,
+        let samplePredicate = HKSamplePredicate.quantitySample(type: HKQuantityType(.bodyMass), predicate: queryPredicate)
+        let weightQuery = HKStatisticsCollectionQueryDescriptor(predicate: samplePredicate,
+                                                                  options: .mostRecent,
                                                                   anchorDate: endDate,
                                                                   intervalComponents: .init(day: 1))
 
         do {
-            let distanceStatisticsCollection = try await distanceQuery.result(for: store)
+            let distanceStatisticsCollection = try await weightQuery.result(for: store)
 
             distanceData = distanceStatisticsCollection.statistics().map({ distanceStatistic in
                 let distance = distanceStatistic.sumQuantity()?.doubleValue(for: .mile()) ?? 0
@@ -74,27 +74,27 @@ import HealthKit
     }
 
 
-    func addMockData() async {
-
+//    func addMockData() async {
+//
 //        var mockData: [HKQuantitySample] = []
 //
-//        for i in 0..<30 {
-//            let stepQuantity = HKQuantity(unit: .count(), doubleValue: .random(in: 4000...21000))
-//            let distanceQuantity = HKQuantity(unit: .mile(), doubleValue: .random(in: 1...10))
+//        for i in 0..<28 {
+//            let stepQuantity = HKQuantity(unit: .count(), doubleValue: .random(in: 5000...20000))
+//            let weightQuantity = HKQuantity(unit: .pound(), doubleValue: .random(in: (160 + Double(i/3)...165 + Double(i/3))))
 //
 //            let startDate = Calendar.current.date(byAdding: .day, value: -i, to: .now)!
 //            let endDate = Calendar.current.date(byAdding: .day, value: -i, to: .now)!
 //
 //            let stepSample = HKQuantitySample(type: HKQuantityType(.stepCount), quantity: stepQuantity, start: startDate, end: endDate)
-//            let distanceSample = HKQuantitySample(type: HKQuantityType(.distanceWalkingRunning), quantity: distanceQuantity, start: startDate, end: endDate)
+//            let weightSample = HKQuantitySample(type: HKQuantityType(.bodyMass), quantity: weightQuantity, start: startDate, end: endDate)
 //
 //            mockData.append(stepSample)
-//            mockData.append(distanceSample)
+//            mockData.append(weightSample)
 //        }
 //
 //        try! await store.save(mockData)
 //        print("🔥 mock data written")
-    }
+//    }
 }
 
 

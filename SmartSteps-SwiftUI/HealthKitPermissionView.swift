@@ -17,7 +17,7 @@ struct HealthKitPermissionView: View {
 
     @Binding var hasSeenHealthKitPermissionView: Bool
 
-    var description = "This app displays your steps count and workout data in interactive charts. \n\nYou can also add these data to Apple Health app from this app. Your data is private and secure."
+    var description = "This app displays your steps count and weight in interactive charts. \n\nYou can also add these data to Apple Health app from this app. Your data is private and secure."
 
     var body: some View {
 
