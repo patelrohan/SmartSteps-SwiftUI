@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A9C97F430A38E8F00ED9DA0 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 4A9C97F330A38E8F00ED9DA0 /* Algorithms */; };
 		4AF575CF308FB4B30023F863 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 4AF575CE308FB4B30023F863 /* .gitignore */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		000000000000000130000000 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
+				4A9C97F430A38E8F00ED9DA0 /* Algorithms in Frameworks */,
 			);
 		};
 /* End PBXFrameworksBuildPhase section */
@@ -66,6 +68,9 @@
 				000000000000000000000010 /* SmartSteps-SwiftUI */,
 			);
 			name = "SmartSteps-SwiftUI";
+			packageProductDependencies = (
+				4A9C97F330A38E8F00ED9DA0 /* Algorithms */,
+			);
 			productName = MyApp;
 			productReference = 000000000000000000000120 /* SmartSteps-SwiftUI.app */;
 			productType = "com.apple.product-type.application";
@@ -95,6 +100,7 @@
 			mainGroup = 000000000000000000000001;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				4A9C97F230A38E8F00ED9DA0 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
 			preferredProjectObjectVersion = 90;
 			productRefGroup = 000000000000000000000020 /* Products */;
@@ -356,6 +362,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4A9C97F230A38E8F00ED9DA0 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4A9C97F330A38E8F00ED9DA0 /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4A9C97F230A38E8F00ED9DA0 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 000000000000000000000000 /* Project object */;
 }
