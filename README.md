@@ -1,15 +1,15 @@
+
 # SmartSteps
  
 A native iOS health dashboard that reads step and weight data from Apple Health (HealthKit) and shows it in interactive, animated charts. Built with SwiftUI and Swift Charts.
  
 > **Status: in progress.** Built following an online course (see [Credits](https://github.com/patelrohan/SmartSteps-SwiftUI/new/main?filename=README.md#credits)) and being extended with my own enhancements. The checklist below shows what is finished and what is next. (see "Planned enhancements").
  
-<!-- Add screenshots or a screen recording here, for example:
+
 <p align="center">
-  <img src="Screenshots/dashboard.png" width="250" />
-  <img src="Screenshots/step-chart.png" width="250" />
+<img width="371" height="775" alt="Screenshot 2026-11-10 at 5 07 18 PM" src="https://github.com/user-attachments/assets/a05c08cf-6b12-4571-9517-774eb8eb1b87" />
 </p>
--->
+
  
 ## Tutorial scope
  
